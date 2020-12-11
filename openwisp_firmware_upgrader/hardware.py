@@ -17,27 +17,8 @@ OPENWRT_FIRMWARE_IMAGE_MAP.update(
     OrderedDict(
         (
             (
-                'ramips-mt76x8-gl-mt300n-v2-squashfs-sysupgrade.bin',
-                {'label': 'GL.iNet GL-MT300N-V2', 'boards': ('GL-MT300N-V2',)},
-            ),
-            (
-                'ar71xx-generic-tl-wdr4300-v1-il-squashfs-sysupgrade.bin',
-                {
-                    'label': 'TP-Link WDR4300 v1 (IL)',
-                    'boards': ('TP-LINK TL-WDR4300 v1 (IL)',),
-                },
-            ),
-            (
-                'ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin',
-                {'label': 'TP-Link WDR4300 v1', 'boards': ('TP-Link TL-WDR4300 v1',)},
-            ),
-            (
-                'ar71xx-generic-xd3200-squashfs-sysupgrade.bin',
-                {'label': 'YunCore XD3200', 'boards': ('YunCore XD3200',)},
-            ),
-            (
-                'ar71xx-generic-ubnt-airrouter-squashfs-sysupgrade.bin',
-                {'label': 'Ubiquiti AirRouter', 'boards': ('Ubiquiti AirRouter',)},
+                'ipq40xx-generic-nokia_wi2b-ac220i-squashfs-sysupgrade.bin',
+                {'label': 'Nokia Airscale WI2B-AC220i', 'boards': ('Nokia Airscale WI2B-AC220i',)},
             ),
         )
     )
