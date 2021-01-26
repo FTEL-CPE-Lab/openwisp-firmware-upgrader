@@ -109,6 +109,7 @@ class AbstractBuild(TimeStampedEditableModel):
             .objects.filter(
                 category__organization=self.category.organization, os=self.os,
             )
+            .exclude(pk=self.pk)
             .exists()
         ):
             raise ValidationError(
@@ -489,7 +490,9 @@ class AbstractUpgradeOperation(TimeStampedEditableModel):
     device = models.ForeignKey(
         swapper.get_model_name('config', 'Device'), on_delete=models.CASCADE
     )
-    image = models.ForeignKey(get_model_name('FirmwareImage'), on_delete=models.CASCADE)
+    image = models.ForeignKey(
+        get_model_name('FirmwareImage'), null=True, on_delete=models.SET_NULL
+    )
     status = models.CharField(
         max_length=12, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0]
     )
