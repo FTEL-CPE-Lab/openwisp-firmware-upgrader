@@ -117,9 +117,30 @@ Follow the `setup instructions of openwisp-controller
         # channels
         'channels',
     ]
-    
+
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     PRIVATE_STORAGE_ROOT = os.path.join(MEDIA_ROOT, 'firmware')
+
+The root URLconf (``urls.py``) should look like the following example:
+
+.. code-block:: python
+
+    from django.conf import settings
+    from django.contrib import admin
+    from django.conf.urls import include, url
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+    urlpatterns = [
+        url(r'^admin/', include(admin.site.urls)),
+        url(r'', include('openwisp_controller.urls')),
+        url(r'', include('openwisp_firmware_upgrader.urls')),
+        # token auth API
+        url(r'^api/v1/', include((get_api_urls(), 'users'), namespace='users')),
+        # needed for API docs
+        url(r'^api/v1/', include('openwisp_utils.api.urls')),
+    ]
+
+    urlpatterns += staticfiles_urlpatterns()
 
 Quickstart
 ----------
@@ -374,6 +395,20 @@ Allows changing the default OpenWRT upgrader settings, eg:
   is closed after the upgrade command is launched on the device,
   useful in case  the upgrade command hangs (it happens on older OpenWRT versions);
   defaults to ``90`` seconds
+
+``OPENWISP_FIRMWARE_API_BASEURL``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++--------------+-----------+
+| **type**:    | ``dict``  |
++--------------+-----------+
+| **default**: | ``None``  |
++--------------+-----------+
+
+If you have a seperate instance of openwisp-firmware-upgrader API on a
+different domain, you can use this option to change the base of the image
+download url, this will enable you to point to your API server's domain,
+example value: https://myfirmware.myapp.com.
 
 REST API
 --------
